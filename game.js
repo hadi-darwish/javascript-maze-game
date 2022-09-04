@@ -10,12 +10,17 @@ var state = true;
 window.onload = (event) => {
   var begin = document.getElementById("start");
   var out = document.querySelectorAll(".boundary");
+  //adding a spot to print condition of winning or losing
+  var statusPos = document.getElementsByTagName("h2");
+  statusPos[0].insertAdjacentHTML("afterend", '<h3 id="win_lose"></h3>');
   updateScore(score);
 
+  //this will track the mouse to execute the function start
   begin.onmouseover = function () {
     start(out);
   };
 
+  //this will reset the score
   begin.onclick = function () {
     location.reload();
   };
@@ -54,6 +59,7 @@ function win() {
   playing = false;
   score += 5;
   updateScore(score);
+  updateStatus(true);
   return;
 }
 //function of wining in the game that adds the score and reset the status
@@ -67,6 +73,7 @@ function lose(out) {
   }
   score -= 10;
   updateScore(score);
+  updateStatus(false);
   return;
 }
 
@@ -79,5 +86,18 @@ function updateScore(score) {
       '<p style="margin:0% 45%; font-weight:bolder; font-size:25px">' +
       score +
       "</p>";
+  }
+}
+
+//function to print the Status of player "You Win" , "You Lose"
+function updateStatus(status) {
+  var statusText = document.getElementById("win_lose");
+  statusText.style.textAlign = "center";
+  if (status == true) {
+    statusText.innerHTML = "You Win";
+    statusText.style.color = "green";
+  } else {
+    statusText.innerHTML = "You Lose";
+    statusText.style.color = "red";
   }
 }
