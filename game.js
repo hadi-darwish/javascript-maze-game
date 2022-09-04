@@ -52,6 +52,16 @@ function start(out) {
       win();
     }
   };
+  //this will prevent the player from cheat
+  //by having a listener on the out side of game div
+  //and if it catch a mouseover it execute lose function
+  window.addEventListener("mouseover", function (e) {
+    if (!document.getElementById("game").contains(e.target)) {
+      if (playing == true) {
+        lose(out);
+      }
+    }
+  });
 }
 
 //function of wining in the game that adds the score and reset the status
